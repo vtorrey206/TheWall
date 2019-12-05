@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Public Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'wall_app/css/public_style.css'%}">
+</head>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <h3>The Fly on the Wall</h3>
+            <p>Welcome {{user.first_name}}</p><a href='/logout'>Log Out</a>
+        </div>
+        <div>
+            <form class="userpost" method="POST" action="/postprocess">
+                {% csrf_token %}
+                <h3>Post a Message</h6><br>
+                <textarea rows="10" cols="100" name="content"></textarea><br>
+                <input class="button" type="submit" value="Post a Message">
+                {% if messages %}
+                    <ul class='messages'>
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'content' %}
+                            <li {%if message.extra_tags%} class='{{message.extra_tags}}' {%endif%}>{{message}}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+             </form>
+        </div>
+        <div>
+            {% for post in all_post%}
+            <p>{{user.first_name}} {{user.last_name}}-{{post.created_at}}</p>
+            <ul>
+                <li>{{post.content}}
+                    {%for comment in all_comments%}
+                    <p>{{user.first_name}} {{user.last_name}}-{{post.created_at}}</p>
+                    <ul>
+                        <li>{{comment.c_content}}</li>
+                    </ul>
+                    {% endfor %}
+                </ul>
+                <form name="usercomments" method="POST" action="/commentprocess">
+                    {% csrf_token %}
+                    <textarea rows="2" cols="50" name="c_content"></textarea><br>
+                    <input type="hidden" name="post_id" value="{{post.id}}">
+                    <input class="button" type="submit" value="Post a Comment">
+                    {% if messages %}
+                    <ul class='messages'>
+                        {% for message in messages %}
+                        {% if message.extra_tags == 'content' %}
+                        <li {%if message.extra_tags%} class='{{message.extra_tags}}' {%endif%}>{{message}}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </form>
+                {% endfor %}
+                
+        </div>
+    </div>
+</body>
+</html>

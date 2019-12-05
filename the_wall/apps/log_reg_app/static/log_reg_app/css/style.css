@@ -1,0 +1,36 @@
+* {
+    
+}
+.wrapper {
+    margin: auto;
+    border: 40px solid black;
+    padding-bottom: 100px;
+}
+.registration {
+    width: 35%;
+    height: auto;
+    /* display: inline-block; */
+    vertical-align: top;
+    /* margin-left: 200px; */
+}
+.registration h2{
+    vertical-align: top;
+    /* display: inline-block; */
+}
+.homeform{
+    /* display: inline-block; */
+    /* vertical-align: top; */
+    /* margin-right: 250px; */
+}
+.login{
+    width: 35%;
+    /* display: inline-block; */
+    
+    
+}
+.login h2{
+    vertical-align: top;
+    /* display: inline-block; */
+    
+}
+

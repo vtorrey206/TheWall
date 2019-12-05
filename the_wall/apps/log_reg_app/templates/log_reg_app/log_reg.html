@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login or Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'log_reg_app/css/style.css'%}">
+</head>
+<body>
+    <div class='wrapper'> <!-- wrapper starts here -->
+        <!-- General validation alerts starts here -->
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    {% if message.extra_tags == 'general' %}
+                    <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                    {% endif %}   
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <!-- General messages ends here -->
+        <div class='registration'> <!-- Registration div starts here -->
+            <h2>Register</h2>
+            <form name='homeform' action='/logreg/register' method='POST'> <!-- Registarion form starts here -->
+                First Name:<input type='text' name='first_name'><br>
+        <!-- First name validation alert starts here -->
+                    {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            {% if message.extra_tags == 'first_name' %}
+                            <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                            {% endif %}   
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+        <!-- First name validation alert ends here -->
+                Last Name:<input type='text' name='last_name'><br>
+        <!-- Last name validation alert starts here -->
+                {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            {% if message.extra_tags == 'last_name' %}
+                            <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                            {% endif %}   
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+        <!-- Last name validation alert ends here -->
+                DOB:<input type='date' name='DOB'><br>
+        <!-- DOB validation alert starts here -->
+                {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            {% if message.extra_tags == 'DOB' %}
+                            <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                            {% endif %}   
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+        <!-- DOB validation alert ends here -->
+                Email:<input type='text' name='email'>
+        <!-- Email validation alert starts here -->
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        {% if message.extra_tags == 'email' %}
+                        <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                        {% endif %}   
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        <!-- Email validation alert ends here --> 
+                Password:<input type='password' name='password'>
+        <!-- Password validation alert starts here -->
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        {% if message.extra_tags == 'password' %}
+                        <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                        {% endif %}   
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        <!-- Password validation alert ends here -->
+                Confirm Password:<input type='password' name='confirm'>
+        <!-- Password match validation alert starts here -->
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        {% if message.extra_tags == 'confirm' %}
+                        <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                        {% endif %}   
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        <!-- Password match validation alert ends here -->
+                <button type='submit'>Register</button>
+                {%csrf_token%}
+
+            </form> <!-- Form ends here -->
+            <div class='login'> <!-- Login div starts here -->
+                <h2>Login</h2>
+                <form name='homeform' action='/logreg/login' method='POST'> <!-- Login form starts here -->
+                    {%csrf_token%}
+                    Email<input type='text' name='email'>
+                    {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            {% if message.extra_tags == 'log_email' %}
+                            <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                            {% endif %}   
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                    Password<input type='password' name='password'>
+                    {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            {% if message.extra_tags == 'log_password' %}
+                            <li {% if message.extra_tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li> 
+                            {% endif %}   
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <button type='submit'>login</button>
+                    
+                </form> <!-- Form ends here -->
+
+            </div><!-- Login div ends here -->
+        </div> <!-- Registration div ends here -->
+    </div> <!-- wrapper ends here -->
+</body>
+</html>
